@@ -5,8 +5,12 @@ on:
     paths:
       - 'icons/*.svg'
 
-permissions:
-  contents: read
+permissions: {}
+
+defaults:
+  run:
+    shell:
+      bash
 
 jobs:
   color-check:
@@ -14,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TARGET_BRANCH: ${{ github.event.pull_request.base.ref }}
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout 🛎️
@@ -24,5 +31,5 @@ jobs:
 
       - name: Check colors 🎨
         run: |
-          svgFiles=$(git diff origin/${{ env.TARGET_BRANCH }} --diff-filter=ACMRTUX  --name-only | grep '.svg$')
+          svgFiles=$(git diff origin/${TARGET_BRANCH} --diff-filter=ACMRTUX  --name-only | grep '.svg$')
           npx svg-color-linter --colors material-colors.yml ${svgFiles}

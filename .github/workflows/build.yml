@@ -4,14 +4,21 @@ on:
   push:
   pull_request:
 
-permissions:
-  contents: read
+permissions: {}
+
+defaults:
+  run:
+    shell:
+      bash
 
 jobs:
   build:
     runs-on: [ubuntu-latest]
 
     name: Build Material Icon Theme
+
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout 🛎

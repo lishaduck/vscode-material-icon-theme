@@ -5,8 +5,12 @@ on:
     types:
       - closed
 
-permissions:
-  contents: read
+permissions: {}
+
+defaults:
+  run:
+    shell:
+      bash
 
 jobs:
   thank_you:
